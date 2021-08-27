@@ -305,8 +305,7 @@ def bapi(user):
 	try:
 		ua = open(".ua", "r").read()
 	except IOError:
-		ua = ("Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]")
-		global ok,cp,ua, loop
+                global loop, token
                 print '\r\033[0;95m[\033[0;97mCrack\033[0;95m] \033[0;97m %s/%s | OK : %s | CP : %s ' %  (loop, len(id), len(ok), len(cp)),
 		sys.stdout.flush()
 		user = arg

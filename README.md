@@ -19,8 +19,8 @@ $ pip2 install bs4
 
 # 》RUN
 
-$ git clone https://github.com/zamxyz/zxr
+$ git clone https://github.com/zamxyz/PBB
 
-$ cd zxr
+$ cd PBB
 
-$ python2 zxr.py
+$ python2 PBB.py

@@ -7,15 +7,15 @@
 
 $ pkg update && upgrade
 
-$ pkg install python2
+$ pkg install python
 
 $ pkg install git
 
-$ pip2 install requests
+$ pip install requests
 
-$ pip2 install mechanize
+$ pip install mechanize
 
-$ pip2 install bs4
+$ pip install bs4
 
 # 》RUN
 
@@ -23,4 +23,4 @@ $ git clone https://github.com/zamxyz/PBB
 
 $ cd PBB
 
-$ python2 PBB.py
+$ python PBB

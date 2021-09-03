@@ -26,4 +26,5 @@ $ cd PBB
 $ python PBB
 
 # 》 HASIL
-![Screenshot_2021-09-03-04-53-53-412_com termux](https://user-images.githubusercontent.com/79139059/132048194-a9cfcb93-03c0-4663-a521-f818e703c73e.jpg)
+
+![Screenshot_2021-09-03-04-42-16-512_com termux](https://user-images.githubusercontent.com/79139059/132048450-09ded60e-9239-4823-97f7-a91677203640.jpg)

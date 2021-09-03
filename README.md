@@ -17,10 +17,13 @@ $ pip install mechanize
 
 $ pip install bs4
 
-# 》RUN
+# RUN
 
 $ git clone https://github.com/zamxyz/PBB
 
 $ cd PBB
 
 $ python PBB
+
+# 》 HASIL
+![Screenshot_2021-09-03-04-53-53-412_com termux](https://user-images.githubusercontent.com/79139059/132048194-a9cfcb93-03c0-4663-a521-f818e703c73e.jpg)
